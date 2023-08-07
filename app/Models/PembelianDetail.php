@@ -15,6 +15,7 @@ class PembelianDetail extends Model
         'id_pembelian',
         'id_produk',
         'harga_beli',
+        'jumlah',
         'subtotal',
         'created_at',
         'updated_at',

@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\PembelianDetailDeleted;
+use App\Jobs\PembelianDetailJob;
+use App\Jobs\PembelianDetailUpdated;
+use App\Jobs\PenjualanDetailDeleted;
 use App\Models\PembelianDetail;
 use App\Models\Produk;
 use App\Models\Supplier;
@@ -97,6 +101,7 @@ class PembelianDetailController extends Controller
             $detail->subtotal = $produk->harga_beli;
             $detail->save();
         }
+        PembelianDetailJob::dispatch($detail->toArray())->onQueue('master-pos');
 
         return response()->json('Data berhasil di simpan', 200);
     }
@@ -107,13 +112,14 @@ class PembelianDetailController extends Controller
         $detail->jumlah = $request->jumlah;
         $detail->subtotal = $detail->harga_beli * $request->jumlah;
         $detail->update();
+        PembelianDetailUpdated::dispatch($detail->toArray())->onQueue('master-pos');
     }
 
     public function destroy($id)
     {
 
-        $detail = PembelianDetail::find($id);
-        $detail->delete();
+        PembelianDetail::destroy($id);
+        PembelianDetailDeleted::dispatch($id)->onQueue('master-pos');
 
         return response(null, 204);
     }

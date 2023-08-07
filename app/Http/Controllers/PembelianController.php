@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\PembelianJob;
+use App\Jobs\PembelianUpdated;
+use App\Jobs\StokPembelianUpdated;
 use Illuminate\Http\Request;
 use App\Models\Pembelian;
 use App\Models\PembelianDetail;
@@ -24,6 +27,7 @@ class PembelianController extends Controller
         $pembelian->diskon      = 0;
         $pembelian->bayar       = 0;
         $pembelian->save();
+        PembelianJob::dispatch($pembelian->toArray())->onQueue('master-pos');
 
         session(['id_pembelian' => $pembelian->id_pembelian]);
         session(['id_supplier'  => $pembelian->id_supplier]);
@@ -106,6 +110,7 @@ class PembelianController extends Controller
         $pembelian->diskon = $request->diskon;
         $pembelian->bayar = $request->bayar;
         $pembelian->update();
+        PembelianUpdated::dispatch($pembelian->toArray())->onQueue('master-pos');
 
         $detail = PembelianDetail::where('id_pembelian', $pembelian->id_pembelian)->get();
 
@@ -113,6 +118,7 @@ class PembelianController extends Controller
             $produk = Produk::find($item->id_produk);
             $produk->stok += $item->jumlah;
             $produk->update();
+            StokPembelianUpdated::dispatch($produk->toArray())->onQueue('master-pos');
         }
 
         return redirect()->route('pembelian.index');
