@@ -7,6 +7,7 @@ use App\Jobs\PenjualanDetailJob;
 use App\Jobs\PenjualanDetailUpdated;
 use App\Jobs\PenjualanJob;
 use App\Jobs\PenjualanUpdated;
+use App\Jobs\StokJob;
 use App\Jobs\StokUpdated;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -39,5 +40,6 @@ class EventServiceProvider extends ServiceProvider
         \App::bindMethod(PenjualanDetailUpdated::class . '@handle', fn ($job) => $job->handle());
         \App::bindMethod(PenjualanDetailDeleted::class . '@handle', fn ($job) => $job->handle());
         \App::bindMethod(StokUpdated::class . '@handle', fn ($job) => $job->handle());
+        \App::bindMethod(StokJob::class . '@handle', fn ($job) => $job->handle());
     }
 }

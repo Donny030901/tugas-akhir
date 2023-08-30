@@ -41,6 +41,7 @@ class PenjualanJob implements ShouldQueue
             'bayar' => $this->data['bayar'],
             'diterima' => $this->data['diterima'],
             'id_user' => $this->data['id_user'],
+            'keterangan' => $this->data['keterangan'],
             'created_at' => $this->data['created_at'],
             'updated_at' => $this->data['updated_at'],
         ]);

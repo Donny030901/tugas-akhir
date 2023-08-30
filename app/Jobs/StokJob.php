@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Models\PenjualanDetail;
+use App\Models\Produk;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -10,7 +10,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class PenjualanDetailJob implements ShouldQueue
+class StokJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     private $data;
@@ -31,15 +31,10 @@ class PenjualanDetailJob implements ShouldQueue
      */
     public function handle()
     {
-        PenjualanDetail::create([
-            'id_penjualan_detail' => $this->data['id_penjualan_detail'],
-            'id_penjualan' => $this->data['id_penjualan'],
+        $penjualan = Produk::find($this->data['id_produk']);
+        $penjualan->update([
             'id_produk' => $this->data['id_produk'],
-            'harga_jual' => $this->data['harga_jual'],
-            'jumlah' => $this->data['jumlah'],
-            'diskon' => $this->data['diskon'],
-            'subtotal' => $this->data['subtotal'],
-            'keterangan' => $this->data['keterangan'],
+            'stok' => $this->data['stok'],
             'created_at' => $this->data['created_at'],
             'updated_at' => $this->data['updated_at'],
         ]);

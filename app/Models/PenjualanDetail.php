@@ -18,6 +18,7 @@ class PenjualanDetail extends Model
         'jumlah',
         'diskon',
         'subtotal',
+        'keterangan',
         'created_at',
         'updated_at',
     ];

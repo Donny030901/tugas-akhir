@@ -19,6 +19,7 @@ class Penjualan extends Model
         'bayar',
         'diterima',
         'id_user',
+        'keterangan',
         'created_at',
         'updated_at',
     ];
