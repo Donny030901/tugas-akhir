@@ -4,7 +4,6 @@ use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
-use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\PembelianDetailController;
 use App\Http\Controllers\PengeluaranController;
@@ -47,9 +46,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/produk', ProdukController::class);
 
     //> Route Member
-    Route::get('/member/data', [MemberController::class, 'data'])->name('member.data');
-    Route::post('/member/cetak-member', [MemberController::class, 'cetakMember'])->name('member.cetak_member');
-    Route::resource('/member', MemberController::class);
+
 
     //> Route Supplier
     Route::get('/supplier/data', [SupplierController::class, 'data'])->name('supplier.data');
@@ -98,4 +95,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
     Route::get('/setting/first', [SettingController::class, 'show'])->name('setting.show');
     Route::post('/setting', [SettingController::class, 'update'])->name('setting.update');
+
+    //> Route Edit Profil
+    Route::get('/profil', [UserController::class, 'profil'])->name('user.profil');
+    Route::post('/profil', [UserController::class, 'updateProfil'])->name('user.updateProfil');
 });

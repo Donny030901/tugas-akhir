@@ -15,6 +15,9 @@
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css"
         integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.42.0/apexcharts.min.css"
+        integrity="sha512-nnNXPeQKvNOEUd+TrFbofWwHT0ezcZiFU5E/Lv2+JlZCQwQ/ACM33FxPoQ6ZEFNnERrTho8lF0MCEH9DBZ/wWw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     @stack('css')
 
@@ -38,7 +41,7 @@
                     <div class="page-title">
                         <div class="row">
                             <div class="col-12 col-md-6 order-md-1 order-last">
-                                <h3>@yield('title')</h3>
+                                {{-- <h3>@yield('title')</h3> --}}
                             </div>
                             <div class="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -64,6 +67,7 @@
             @include('layouts.footer')
         </div>
     </div>
+    <script src="{{ asset('assets/extensions/chart.js') }}"></script>
     <script src=" {{ asset('assets/extensions/jquery/jquery.min.js ') }}"></script>
     <script src="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.js"></script>
     <script src=" {{ asset('assets/static/js/components/dark.js ') }}"></script>
@@ -71,10 +75,23 @@
     <script src="assets/extensions/sweetalert2/sweetalert2.min.js"></script>
     <script src="assets/static/js/pages/sweetalert2.js"></script>
     <script src=" {{ asset('assets/compiled/js/app.js ') }}"></script>
+    <script src="{{ asset('assets/static/js/pages/ui-chartjs.js') }}"></script>
 
     <!-- Need: Apexcharts -->
     <script src=" {{ asset('assets/static/js/pages/dashboard.js ') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.42.0/apexcharts.min.js"
+        integrity="sha512-HctQcT5hnI/elQck4950pvd50RuDnjCSGSoHI8CNyQIYVxsUoyJ+gSQIOrll4oM/Z7Kfi7WCLMIbJbiwYHFCpA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/11.0.1/highcharts.js"
+        integrity="sha512-bdh59dK4gjyd/T+ptbOau3WEjtNLRy1eWtYkAfv2PCQODTaN2XXLVWKGQbPLbd5JB1Gn1oStmblZMSgXY29nrA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Include Highcharts Library -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <!-- Include ApexCharts Library -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+
 
 
     <script>

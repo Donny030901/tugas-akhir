@@ -65,7 +65,7 @@
                     <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="user-menu d-flex">
                             <div class="user-name text-end me-3">
-                                <h6 class="mb-0 text-gray-600">{{ auth()->user()->name }}</h6>
+                                <h6 class="mb-0 text-gray-600" id="namaku">{{ auth()->user()->name }}</h6>
                                 <p class="mb-0 text-sm text-gray-600">{{ auth()->user()->email }}</p>
                             </div>
                             <div class="user-img d-flex align-items-center">
@@ -78,10 +78,11 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton"
                         style="min-width: 11rem">
                         <li>
-                            <h6 class="dropdown-header">Hello, {{ auth()->user()->name }}!</h6>
+                            <h6 class="dropdown-header" id="namaku_bawah">Hello, {{ auth()->user()->name }}!</h6>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#"><i class="icon-mid bi bi-person me-2"></i> My
+                            <a class="dropdown-item" href="{{ route('user.profil') }}"><i
+                                    class="icon-mid bi bi-person me-2"></i> My
                                 Profile</a>
                         </li>
 
@@ -89,7 +90,9 @@
                             <hr class="dropdown-divider" />
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#"><i class="icon-mid bi bi-box-arrow-left me-2"></i>
+                            <a class="dropdown-item" href="#" class="sidebar-link"
+                                onclick="document.getElementById('logout-form').submit()"><i
+                                    class="icon-mid bi bi-box-arrow-left me-2"></i>
                                 Logout</a>
                         </li>
                     </ul>
@@ -98,18 +101,7 @@
         </div>
     </nav>
 </header>
-{{-- <header class="mb-3">
-    <a href="#" class="burger-btn d-block d-xl-none">
-        <i class="bi bi-justify fs-3"></i>
-    </a>
-    <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-        <ol class="breadcrumb">
-            @section('breadcrumb')
-                <li class="breadcrumb-item">
-                    <a href="#">@yield('nav')</a>
-                </li>
+<form method="POST" action="{{ route('logout') }}" id="logout-form" style="display: none;">
+    @csrf
 
-            @show
-        </ol>
-    </nav>
-</header> --}}
+</form>

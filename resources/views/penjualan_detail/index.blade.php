@@ -54,6 +54,11 @@
                             Pilih barang sebelum Bayar!
                         </div>
                     @endif
+                    @if (Session::get('status_bayar') == 'error_bayar')
+                        <div class="alert alert-danger alert-dismissible" id="alert-error" role="alert">
+                            Masukan Nominal Uang Yang Dibayar!
+                        </div>
+                    @endif
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -102,15 +107,15 @@
                                 <input type="hidden" name="total" id="total">
                                 <input type="hidden" name="total_item" id="total_item">
                                 <input type="hidden" name="bayar" id="bayar">
-                                <input type="hidden" name="id_member" id="id_member">
+                                <input type="hidden" name="diskon" id="diskon" value="0">
 
-                                <div class="form-group row">
+                                {{-- <div class="form-group row">
                                     <label for="totalrp" class="col-lg-4 control-label">Total</label>
                                     <div class="col-lg-8">
                                         <input type="text" id="totalrp" class="form-control" readonly disabled>
                                     </div>
-                                </div>
-                                <div class="form-group row">
+                                </div> --}}
+                                {{-- <div class="form-group row">
                                     <label for="kode_member" class="col-lg-4 control-label">Member</label>
                                     <div class="col-lg-8">
                                         <div class="input-group mb-3">
@@ -119,14 +124,13 @@
                                                 <i data-feather="arrow-right"></i>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="diskon" class="col-lg-4 control-label">Diskon</label>
+                                </div> --}}
+                                {{-- <div class="form-group row">
+                                    <label for="diskon" class="col-lg-4 control-label">Anda Hemat</label>
                                     <div class="col-lg-8">
-                                        <input type="number" name="diskon" id="diskon" class="form-control"
-                                            value="0" readonly>
+                                        <input type="number" name="hemat" id="hemat" class="form-control" readonly>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="form-group row">
                                     <label for="bayar" class="col-lg-4 control-label">Total Bayar</label>
                                     <div class="col-lg-8">
@@ -134,7 +138,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="diterima" class="col-lg-4 control-label">Diterima</label>
+                                    <label for="diterima" class="col-lg-4 control-label">Bayar</label>
                                     <div class="col-lg-8">
                                         <input type="number" id="diterima" class="form-control" value="0"
                                             name="diterima">
@@ -166,7 +170,6 @@
         </section> --}}
     </div>
     @includeIf('penjualan_detail.produk')
-    @includeIf('penjualan_detail.member')
 @endsection
 
 @push('scripts')
@@ -319,40 +322,49 @@
 
         }
 
-        function tampilMember() {
-            $('#modal-member').prependTo('body').modal('show');
-        }
-
-        function pilihMember(id, kode) {
-            $('#id_member').val(id);
-            $('#kode_member').val(kode);
-            $('#diskon').val('{{ $diskon }}');
-            loadForm($('#diskon').val());
-            $('#diterima').val(0).focus().select();
-            hideMember();
-        }
-
-        function hideMember() {
-            $('#modal-member').modal('hide');
-
-        }
 
         function deleteData(url) {
-            if (confirm('Yakin ingin menghapus data terpilih?')) {
-                $.post(url, {
-                        '_token': $('[name=csrf-token]').attr('content'),
-                        '_method': 'delete'
-                    })
-                    .done((response) => {
-                        swal.fire('Success', 'Berhasil Menghapus Produk Terpilih ', 'success')
-                        table.ajax.reload(() => loadForm($('#diskon').val()));
-                    })
-                    .fail((errors) => {
-                        swal.fire('Error', 'Tidak dapat menghapus data', 'error')
-                        return;
-                    });
-            }
+            Swal.fire({
+                title: 'Yakin ingin menghapus data terpilih?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Hapus!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post(url, {
+                            '_token': $('[name=csrf-token]').attr('content'),
+                            '_method': 'delete'
+                        })
+                        .done((response) => {
+                            swal.fire('Deleted!', 'Behasil Menghapus Data', 'success')
+                            table.ajax.reload(() => loadForm($('#diskon').val()));
+                        })
+                        .fail((errors) => {
+                            swal.fire('Error', 'Tidak dapat menghapus data', 'error')
+                            return;
+                        });
+
+                }
+            })
         }
+        // function deleteData(url) {
+        //     if (confirm('Yakin ingin menghapus data terpilih?')) {
+        //         $.post(url, {
+        //                 '_token': $('[name=csrf-token]').attr('content'),
+        //                 '_method': 'delete'
+        //             })
+        //             .done((response) => {
+        //                 swal.fire('Success', 'Berhasil Menghapus Produk Terpilih ', 'success')
+        //                 table.ajax.reload(() => loadForm($('#diskon').val()));
+        //             })
+        //             .fail((errors) => {
+        //                 swal.fire('Error', 'Tidak dapat menghapus data', 'error')
+        //                 return;
+        //             });
+        //     }
+        // }
 
         function loadForm(diskon = 0, diterima = 0) {
             $('#total').val($('.total').text());

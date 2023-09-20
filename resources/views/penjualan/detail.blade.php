@@ -16,6 +16,7 @@
                               <th>Nama</th>
                               <th>Harga</th>
                               <th>Jumlah</th>
+                              <th>Diskon</th>
                               <th>Subtotal</th>
                           </thead>
                       </table>

@@ -18,13 +18,13 @@ class PenjualanController extends Controller
     public function create()
     {
         $penjualan = new Penjualan();
-        $penjualan->id_member = null;
         $penjualan->total_item = 0;
         $penjualan->total_harga = 0;
         $penjualan->diskon = 0;
         $penjualan->bayar = 0;
         $penjualan->diterima = 0;
         $penjualan->id_user = auth()->id();
+        $penjualan->keterangan = 'Online';
         $penjualan->save();
 
         session(['id_penjualan' => $penjualan->id_penjualan]);
@@ -50,10 +50,6 @@ class PenjualanController extends Controller
             ->addColumn('tanggal', function ($penjualan) {
                 return tanggal_indonesia($penjualan->created_at, false);
             })
-            ->addColumn('kode_member', function ($penjualan) {
-                $member = $penjualan->member->kode_member ?? '';
-                return '<span class="badge bg-success">' . $member . '</span>';
-            })
             ->editColumn('diskon', function ($penjualan) {
                 return $penjualan->diskon . '%';
             })
@@ -66,7 +62,7 @@ class PenjualanController extends Controller
               
                 ';
             })
-            ->rawColumns(['aksi', 'kode_member'])
+            ->rawColumns(['aksi'])
             ->make(true);
     }
     public function show($id)
@@ -88,6 +84,9 @@ class PenjualanController extends Controller
             ->addColumn('jumlah', function ($detail) {
                 return format_uang($detail->jumlah);
             })
+            ->addColumn('diskon', function ($detail) {
+                return $detail->diskon . '%';
+            })
             ->addColumn('subtotal', function ($detail) {
                 return 'Rp. ' . format_uang($detail->subtotal);
             })
@@ -106,7 +105,9 @@ class PenjualanController extends Controller
         if ($detail->count() == 0) {
             return redirect()->to('transaksi')->with(Session()->flash('status', 'error_checkout'));
         }
-        $penjualan->id_member = $request->id_member;
+        if ($penjualan->diterima = $request->diterima == 0) {
+            return redirect()->to('transaksi')->with(Session()->flash('status_bayar', 'error_bayar'));
+        }
         $penjualan->total_item = $request->total_item;
         $penjualan->total_harga = $request->total;
         $penjualan->diskon = $request->diskon;

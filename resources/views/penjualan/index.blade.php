@@ -25,12 +25,11 @@
                         <thead>
                             <th width="5%">No</th>
                             <th>Tanggal</th>
-                            <th>Kode Member</th>
                             <th>Total Item</th>
-                            <th>Total Harga</th>
-                            <th>Diskon</th>
-                            <th>Total Bayar</th>
+                            <th>Harga Jual</th>
+                            <th>Total</th>
                             <th>Kasir</th>
+                            <th>Keterangan</th>
                             <th width="10%"><i data-feather="settings"></i></th>
 
                         </thead>
@@ -66,22 +65,19 @@
                         data: 'tanggal'
                     },
                     {
-                        data: 'kode_member'
-                    },
-                    {
                         data: 'total_item'
                     },
                     {
                         data: 'total_harga'
                     },
                     {
-                        data: 'diskon'
-                    },
-                    {
                         data: 'bayar'
                     },
                     {
                         data: 'kasir'
+                    },
+                    {
+                        data: 'keterangan'
                     },
                     {
                         data: 'aksi',
@@ -110,6 +106,9 @@
                     },
                     {
                         data: 'jumlah'
+                    },
+                    {
+                        data: 'diskon'
                     },
                     {
                         data: 'subtotal'

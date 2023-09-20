@@ -34,7 +34,6 @@ class PenjualanJob implements ShouldQueue
 
         Penjualan::create([
             'id_penjualan' => $this->data['id_penjualan'],
-            'id_member' => $this->data['id_member'],
             'total_item' => $this->data['total_item'],
             'total_harga' => $this->data['total_harga'],
             'diskon' => $this->data['diskon'],

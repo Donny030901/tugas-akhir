@@ -66,24 +66,12 @@
                         </li>
                     </ul>
                 </li>
-                <li class="sidebar-item has-sub {{ request()->is('member', 'supplier') ? 'active' : '' }}">
-                    <a href="#" class="sidebar-link">
+                <li class="sidebar-item {{ request()->is('supplier') ? 'active' : '' }}">
+                    <a href="{{ route('supplier.index') }}" class="sidebar-link">
                         <i class="bi bi-person"></i>
-                        <span>Daftar Member &amp; Supplier</span>
+                        <span>Daftar Supplier</span>
                     </a>
-
-                    <ul class="submenu">
-                        <li class="submenu-item {{ request()->is('member') ? 'active' : '' }}">
-                            <a href="{{ route('member.index') }}" class="submenu-link">Member</a>
-                        </li>
-
-                        <li class="submenu-item {{ request()->is('supplier') ? 'active' : '' }}">
-                            <a href="{{ route('supplier.index') }}" class="submenu-link">Supplier</a>
-                        </li>
-                    </ul>
                 </li>
-
-
                 <li
                     class="sidebar-item has-sub {{ request()->is('pengeluaran', 'pembelian', 'penjualan', 'transaksi') ? 'active' : '' }}">
                     <a href="#" class="sidebar-link">
@@ -132,18 +120,8 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link" onclick="document.getElementById('logout-form').submit()">
-                        <i class="bi bi-box-arrow-left"></i>
-                        <span>Log Out</span>
-                    </a>
-                </li>
+
             </ul>
         </div>
     </div>
 </div>
-
-<form method="POST" action="{{ route('logout') }}" id="logout-form" style="display: none;">
-    @csrf
-
-</form>

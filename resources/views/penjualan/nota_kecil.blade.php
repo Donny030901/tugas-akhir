@@ -110,13 +110,14 @@
             <thead>
                 <tr>
                     <td width="5%">No</td>
-                    <td width="35%">Nama Barang</td>
+                    <td width="30%">Nama Barang</td>
                     <td>Qty</td>
                     <td>Harga</td>
+                    <td>Diskon</td>
                     <td>Jumlah</td>
                 </tr>
                 <tr>
-                    <td colspan="5" class="line"></td>
+                    <td colspan="8" class="line"></td>
                 </tr>
             </thead>
             <tbody>
@@ -126,7 +127,8 @@
                         <td width="35%">{{ $s->produk->nama_produk }}</td>
                         <td>{{ $s->jumlah }}</td>
                         <td>{{ number_format($s->harga_jual, 2, ',', '.') }}</td>
-                        <td>{{ number_format($s->jumlah * $s->harga_jual, 2, ',', '.') }}</td>
+                        <td>{{ $s->produk->diskon . '%' }}</td>
+                        <td>{{ number_format($s->subtotal, 2, ',', '.') }}</td>
                     </tr>
                 @endforeach
             </tbody>
@@ -134,30 +136,36 @@
         <hr class="hr-dash">
         <table class="w-100">
             <tr>
-                <td class="left">Subtotal (Jumlah : {{ $penjualan->total_item }})</td>
+                <td class="left">Harga Jual (Jumlah : {{ $penjualan->total_item }})</td>
                 <td class="right">{{ number_format($penjualan->total_harga, 2, ',', '.') }}</td>
             </tr>
-            <tr>
+            {{-- <tr>
                 <td class="left">Diskon ({{ $penjualan->diskon }}%)</td>
                 <td class="right">
                     {{ number_format(($penjualan->total_harga * $penjualan->diskon) / 100, 2, ',', '.') }}
                 </td>
-            </tr>
-            <tr>
-                <td class="left">Total</td>
-                <td class="right">{{ number_format($penjualan->bayar, 2, ',', '.') }}</td>
-            </tr>
+            </tr> --}}
+
         </table>
         <hr class="hr-dash">
         <table class="w-100">
             <tr>
-                <td class="left">Bayar</td>
+                <td class="left">Total</td>
+                <td class="right">{{ number_format($penjualan->bayar, 2, ',', '.') }}</td>
+            </tr>
+            <tr>
+                <td class="left">Tunai</td>
                 <td class="right">{{ number_format($penjualan->diterima, 2, ',', '.') }}</td>
             </tr>
             <tr>
                 <td class="left">Kembali</td>
                 <td class="right">{{ number_format($penjualan->diterima - $penjualan->bayar, 2, ',', '.') }}</td>
             </tr>
+            {{-- <tr>
+                <td class="left">Anda Hemat</td>
+                <td class="right">
+                    {{ number_format($detail->diskon, 2, ',', '.') }}</td>
+            </tr> --}}
         </table>
         <hr class="hr-dash">
     </div>

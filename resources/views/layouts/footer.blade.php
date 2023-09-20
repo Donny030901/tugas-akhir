@@ -3,12 +3,6 @@
         <div class="float-start">
             <p>2023 &copy; Donny Setiawan</p>
         </div>
-        <div class="float-end">
-            <p>
-                Crafted with
-                <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span>
-                by <a href="https://saugi.me">Saugi</a>
-            </p>
-        </div>
+
     </div>
 </footer>

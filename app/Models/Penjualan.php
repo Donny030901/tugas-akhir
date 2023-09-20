@@ -12,7 +12,6 @@ class Penjualan extends Model
     protected $primaryKey = 'id_penjualan';
     protected $fillable = [
         'id_penjualan',
-        'id_member',
         'total_item',
         'total_harga',
         'diskon',
@@ -25,10 +24,6 @@ class Penjualan extends Model
     ];
     protected $guaraded = [];
 
-    public function member()
-    {
-        return $this->hasOne(Member::class, 'id_member', 'id_member');
-    }
     public function user()
     {
         return $this->hasOne(User::class, 'id', 'id_user');
