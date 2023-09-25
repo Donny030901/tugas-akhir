@@ -41,7 +41,7 @@
                           <button class="btn btn-primary ms-1">
                               <span class="d-none d-sm-block">Simpan</span>
                           </button>
-                          <button class="btn btn-light-primary" data-bs-dismiss="modal">
+                          <button type="button" class="btn btn-light-primary" data-bs-dismiss="modal">
                               <span class="d-none d-sm-block">Batal</span>
                           </button>
                       </div>

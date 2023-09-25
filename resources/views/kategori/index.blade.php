@@ -26,7 +26,7 @@
         </section>
         <section class="section">
             <div class="card">
-                <div class="card-header">Kategori</div>
+                <div class="card-header">Data Kategori</div>
                 <div class="card-body table-responsive">
                     <table class="table table-striped table-bordered">
                         <thead>

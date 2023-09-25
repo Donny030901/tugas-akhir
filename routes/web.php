@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\PembelianDetailController;
@@ -99,4 +100,9 @@ Route::group(['middleware' => 'auth'], function () {
     //> Route Edit Profil
     Route::get('/profil', [UserController::class, 'profil'])->name('user.profil');
     Route::post('/profil', [UserController::class, 'updateProfil'])->name('user.updateProfil');
+
+    //> Route Laporan
+    Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
+    Route::get('/laporan/data/{awal}/{akhir}', [LaporanController::class, 'data'])->name('laporan.data');
+    Route::get('/laporan/pdf/{awal}/{akhir}', [LaporanController::class, 'exportPDF'])->name('laporan.exportPDF');
 });

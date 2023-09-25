@@ -34,7 +34,7 @@
         </section>
         <section class="section">
             <div class="card">
-                <div class="card-header"></div>
+                <div class="card-header">Data Produk</div>
                 <div class="card-body table-responsive">
                     <form action="" method="post" class="form-produk">
                         @csrf

@@ -1,32 +1,38 @@
       <div class="modal fade text-left modal-borderless" id="modal-form" tabindex="-1" role="dialog"
           aria-labelledby="myModalLabel1" aria-hidden="true">
           <div class="modal-dialog modal-dialog-scrollable" role="document">
-              <form action="" method="post" class="form-horizontal">
-                  @csrf
-                  @method('post')
+              <form action="{{ route('laporan.index') }}" method="get" class="form-horizontal">
+                  {{-- @csrf
+                  @method('post') --}}
 
 
                   <div class="modal-content">
                       <div class="modal-header">
-                          <h5 class="modal-title"></h5>
+                          <h5 class="modal-title"> Periode Laporan</h5>
                           <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
                               <i data-feather="x"></i>
                           </button>
                       </div>
                       <div class="modal-body">
                           <div class="form-group row">
-                              <label for="deskripsi" class="col-lg-2 col-lg-offset-1 control-label">Deskripsi</label>
+                              <label for="tanggal_awal" class="col-lg-2 col-lg-offset-1 control-label">Tanggal
+                                  Awal</label>
                               <div class="col-lg-10">
-                                  <input type="text" name="deskripsi" id="deskripsi" class="form-control" required
-                                      autofocus>
+                                  <input type="text" name="tanggal_awal" id="tanggal_awal"
+                                      class="form-control flatpickr" required autofocus
+                                      value="{{ request('tanggal_awal') }}">
                                   <span class="help-block with-errors"></span>
                               </div>
                           </div>
                           <div class="form-group row">
-                              <label for="nominal" class="col-lg-2 col-lg-offset-1 control-label">Nominal</label>
+                              <label for="tanggal_akhir" class="col-lg-2 col-lg-offset-1 control-label">Tanggal
+                                  Akhir</label>
                               <div class="col-lg-10">
-                                  <input type="number" name="nominal" id="nominal" class="form-control" required>
-                                  <span class="help-block with-errors"></span>
+                                  <input type="text" name="tanggal_akhir" id="tanggal_akhir"
+                                      class="form-control flatpickr" required autofocus
+                                      value="{{ request('tanggal_akhir') }}"">
+                                  <span class="help-block
+                                      with-errors"></span>
                               </div>
                           </div>
                       </div>

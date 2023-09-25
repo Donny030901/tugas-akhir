@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\UserDeleted;
 use App\Jobs\UserJob;
+use App\Jobs\UserUpdated;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -106,7 +108,7 @@ class UserController extends Controller
         }
         $user->level = $request->level;
         $user->update();
-
+        UserUpdated::dispatch($user->toArray())->onQueue('master-pos');
         return response()->json('Data Berhasil di Simpan', 200);
     }
 
@@ -119,6 +121,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::find($id)->delete();
+        UserDeleted::dispatch($id)->onQueue('master-pos');
 
         return response(null, 204);
     }

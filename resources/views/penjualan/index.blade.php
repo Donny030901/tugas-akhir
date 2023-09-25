@@ -18,7 +18,7 @@
 
         <section class="section">
             <div class="card">
-                <div class="card-header">Daftar Transaksi Penjualan</div>
+                <div class="card-header">Data Transaksi Penjualan</div>
                 <div class="card-body table-responsive">
 
                     <table class="table table-striped table-bordered table-penjualan">

@@ -38,7 +38,7 @@ class DashboardController extends Controller
         $bulanIni = Carbon::now()->month;
 
         $tanggalMulai = Carbon::create($tahunIni, $bulanIni, 1, 0, 0, 0);
-        $tanggalAkhir = $tanggalMulai->copy()->endOfMonth();
+        $tanggalAkhir = Carbon::now();
 
         // Menghitung total pengeluaran bulan ini
         $totalPengeluaran = Pengeluaran::whereBetween('created_at', [$tanggalMulai, $tanggalAkhir])->sum('nominal');

@@ -27,7 +27,7 @@
         </section>
         <section class="section">
             <div class="card">
-                <div class="card-header">Transaksi Pembelian</div>
+                <div class="card-header">Data Transaksi Pembelian</div>
                 <div class="card-body table-responsive">
 
                     <table class="table table-striped table-bordered table-pembelian">

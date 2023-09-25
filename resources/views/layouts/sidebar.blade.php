@@ -100,8 +100,8 @@
                     </ul>
                 </li>
 
-                <li class="sidebar-item">
-                    <a href="form-layout.html" class="sidebar-link">
+                <li class="sidebar-item {{ request()->is('laporan') ? 'active' : '' }}">
+                    <a href="{{ route('laporan.index') }}" class="sidebar-link">
                         <i class="bi bi-journal-check"></i>
                         <span>Laporan</span>
                     </a>
