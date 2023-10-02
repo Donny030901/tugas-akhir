@@ -390,4 +390,21 @@
                 })
         }
     </script>
+    <script>
+        $(document).ready(function() {
+            $('#kategori').on('change', function() {
+                var selectedKategori = $(this).val();
+
+                // Semua kategori dipilih
+                if (selectedKategori === '') {
+                    $('.table-produk tbody tr').show();
+                } else {
+                    // Sembunyikan semua baris tabel
+                    $('.table-produk tbody tr').hide();
+                    // Tampilkan baris-baris yang sesuai dengan kategori yang dipilih
+                    $('.table-produk tbody tr[data-kategori="' + selectedKategori + '"]').show();
+                }
+            });
+        });
+    </script>
 @endpush

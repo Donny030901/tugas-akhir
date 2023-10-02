@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\PengeluaranDeleted;
+use App\Jobs\PengeluaranJob;
+use App\Jobs\PengeluaranUpdated;
 use App\Models\Pengeluaran;
 use Illuminate\Http\Request;
 
@@ -64,7 +67,7 @@ class PengeluaranController extends Controller
     public function store(Request $request)
     {
         $pengeluaran = Pengeluaran::create($request->all());
-
+        PengeluaranJob::dispatch($pengeluaran->toArray())->onQueue('master-pos');
         return response()->json('Data Berhasil di Simpan', 200);
     }
 
@@ -102,7 +105,7 @@ class PengeluaranController extends Controller
     public function update(Request $request, $id)
     {
         $pengeluaran = Pengeluaran::find($id)->update($request->all());
-
+        PengeluaranUpdated::dispatch($pengeluaran->toArray())->onQueue('master-pos');
         return response()->json('Data Berhasil di Simpan', 200);
     }
 
@@ -114,8 +117,9 @@ class PengeluaranController extends Controller
      */
     public function destroy($id)
     {
-        $pengeluaran = Pengeluaran::find($id)->delete();
-
+        // $pengeluaran = Pengeluaran::find($id)->delete();
+        Pengeluaran::destroy($id);
+        PengeluaranDeleted::dispatch($id)->onQueue('master-pos');
         return response(null, 204);
     }
 }

@@ -13,6 +13,7 @@ use App\Http\Controllers\PenjualanDetailController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +33,17 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', function () {
+        // dd(auth()->user()->level);
+        if (auth()->user()->level == 0) {
+
+            Auth::guard('web')->logout(); // Logout pengguna
+            return redirect()->route('login', [])->with('error', 'Anda adalah Kasir dan tidak dapat mengakses dashboard.');
+        } else {
+            return app(DashboardController::class)->index();
+        }
+    })->name('dashboard');
+    // Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
 Route::group(['middleware' => 'auth'], function () {

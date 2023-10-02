@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kategori;
 use App\Models\PenjualanDetail;
 use App\Models\Produk;
 use App\Models\Setting;
@@ -12,11 +13,12 @@ class PenjualanDetailController extends Controller
     public function index()
     {
         $produk = Produk::orderBy('id_produk')->get();
+        $kategori = Kategori::orderBy('id_kategori')->get();
         $diskon = Setting::first()->diskon ?? 0;
 
         //Cek apakah ada transaksi yang sedang berjalan
         if ($id_penjualan = session('id_penjualan')) {
-            return view('penjualan_detail.index', compact('produk', 'diskon', 'id_penjualan'));
+            return view('penjualan_detail.index', compact('produk', 'diskon', 'id_penjualan', 'kategori'));
         } else {
             if (auth()->user()->level == 1) {
                 return redirect()->route('transaksi.baru');

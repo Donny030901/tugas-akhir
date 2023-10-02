@@ -9,6 +9,16 @@
                       </button>
                   </div>
                   <div class="modal-body">
+                      <div class="form-group" style="width: 150px;">
+                          <label for="kategori" style="font-size: 12px;">Filter Kategori :</label>
+                          <select class="form-control" id="kategori"
+                              style="font-size: 12px; padding: 5px; width: 100%;">
+                              <option value="">Semua Kategori</option>
+                              @foreach ($kategori as $k)
+                                  <option value="{{ $k->id_kategori }}">{{ $k->nama_kategori }}</option>
+                              @endforeach
+                          </select>
+                      </div>
                       <table class="table table-striped table-bordered table-produk">
                           <thead>
                               <th width="5%">No</th>
@@ -20,7 +30,7 @@
                           </thead>
                           <tbody>
                               @foreach ($produk as $key => $p)
-                                  <tr>
+                                  <tr data-kategori="{{ $p->id_kategori }}">
                                       <td width="5%">{{ (int) $key + 1 }}</td>
                                       <td><span class="badge bg-success">{{ $p->kode_produk }}</span></td>
                                       <td>{{ $p->nama_produk }}</td>

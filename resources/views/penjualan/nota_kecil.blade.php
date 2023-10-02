@@ -86,7 +86,8 @@
 
 <body>
     <div class="header">
-        <p class="uppercase bold d-block center b-p">{{ $setting->nama_perusahaan }}</p>
+        <p class="uppercase bold d-block center b-p"><img src="{{ asset('/images/spos.png') }}" alt="Logo"
+                srcset="" style="width: 110px; height:auto;" /></p>
         <p class="top-min d-block center">{{ $setting->alamat }}</p>
         <p class="top-min d-block center">{{ $setting->telepon }}</p>
         <hr class="hr-dash">
